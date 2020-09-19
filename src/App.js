@@ -34,6 +34,14 @@ function App (props) {
     setTasks(updatedTasks)
   }
 
+  // task delete function for Todo component
+  function deleteTask (id) {
+    // used filter where we remove the matched id from list
+    const remainingTasks = tasks.filter(task => id !== task.id)
+    // overrides the array with new array
+    setTasks(remainingTasks)
+  }
+
   // the tasklist running through loop and return the component Todo
   const taskList = tasks.map(task => (
     <Todo
@@ -42,6 +50,7 @@ function App (props) {
       completed={task.completed}
       key={task.id}
       toggleTaskCompleted={toggleTaskCompleted}
+      deleteTask={deleteTask}
     />
   ))
 
@@ -56,6 +65,8 @@ function App (props) {
       <Form addTask={addTask} />
 
       <div className='filters btn-group stack-exception'>
+        <FilterButton />
+        <FilterButton />
         <FilterButton />
       </div>
       <h2 id='list-heading'>
