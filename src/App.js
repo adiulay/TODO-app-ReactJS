@@ -1,45 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Todo from './components/Todo'
 import Form from './components/Form'
 import './App.css'
+import FilterButton from './components/FilterButton'
+import { nanoid } from 'nanoid'
 
 function App (props) {
+  // state
+  const [tasks, setTasks] = useState(props.tasks)
+
+  // function that sets a state
+  function addTask (name) {
+    const newTask = {
+      id: 'id-' + nanoid(),
+      name: name,
+      completed: false
+    }
+    setTasks([...tasks, newTask])
+  }
+
+  // checkmark toggle placed in Todo component
+  function toggleTaskCompleted (id) {
+    console.log(tasks[0])
+  }
 
   // the tasklist running through loop and return the component Todo
-  const taskList = props.tasks.map((task) => {
-    return <Todo
+  const taskList = tasks.map(task => (
+    <Todo
+      id={task.id}
       name={task.name}
       completed={task.completed}
-      id={task.id}
       key={task.id}
+      toggleTaskCompleted={toggleTaskCompleted}
     />
-  })
+  ))
+
+  // number of tasks will be shown on app
+  const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task'
+  const headingText = `${taskList.length} ${tasksNoun} remaining`
 
   return (
     <div className='todoapp stack-large'>
       <h1>TodoMatic</h1>
 
-      <Form />
-      
+      <Form addTask={addTask} />
+
       <div className='filters btn-group stack-exception'>
-        <button type='button' className='btn toggle-btn' aria-pressed='true'>
-          <span className='visually-hidden'>Show </span>
-          <span>all</span>
-          <span className='visually-hidden'> tasks</span>
-        </button>
-        <button type='button' className='btn toggle-btn' aria-pressed='false'>
-          <span className='visually-hidden'>Show </span>
-          <span>Active</span>
-          <span className='visually-hidden'> tasks</span>
-        </button>
-        <button type='button' className='btn toggle-btn' aria-pressed='false'>
-          <span className='visually-hidden'>Show </span>
-          <span>Completed</span>
-          <span className='visually-hidden'> tasks</span>
-        </button>
+        <FilterButton />
       </div>
       <h2 id='list-heading'>
-        3 tasks remaining
+        {headingText}
       </h2>
       <ul
         role='list'

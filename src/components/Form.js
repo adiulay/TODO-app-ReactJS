@@ -1,8 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function Form (props) {
+  // state name
+  const [name, setName] = useState('')
+
+  // Form when clicked send adds it to addTask from App component
+  function handleSubmit (e) {
+    e.preventDefault()
+    props.addTask(name)
+    setName('')
+  }
+
+  // sets state with the new string inputted by user
+  function handleChange (e) {
+    setName(e.target.value)
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h2 className='label-wrapper'>
         <label htmlFor='new-todo-input' className='label__lg'>
             What needs to be done?
@@ -14,6 +29,8 @@ function Form (props) {
         className='input input__lg'
         name='text'
         autoComplete='off'
+        value={name}
+        onChange={handleChange}
       />
       <button type='submit' className='btn btn__primary btn__lg'>
           Add
