@@ -21,7 +21,17 @@ function App (props) {
 
   // checkmark toggle placed in Todo component
   function toggleTaskCompleted (id) {
-    console.log(tasks[0])
+    const updatedTasks = tasks.map(task => {
+      // checks if ID is same as the one being edited
+      if (id === task.id) {
+        // !task.completed reverses the boolean 🤯
+        // spread syntax is involved (...task)
+        return { ...task, completed: !task.completed }
+      }
+      return task
+    })
+
+    setTasks(updatedTasks)
   }
 
   // the tasklist running through loop and return the component Todo
