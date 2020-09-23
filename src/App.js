@@ -65,17 +65,19 @@ function App (props) {
   }
 
   // the tasklist running through loop and return the component Todo
-  const taskList = tasks.map(task => (
-    <Todo
-      id={task.id}
-      name={task.name}
-      completed={task.completed}
-      key={task.id}
-      toggleTaskCompleted={toggleTaskCompleted}
-      deleteTask={deleteTask}
-      editTask={editTask}
-    />
-  ))
+  const taskList = tasks
+    .filter(task => FILTER_MAP[filter](task))
+    .map(task => (
+      <Todo
+        id={task.id}
+        name={task.name}
+        completed={task.completed}
+        key={task.id}
+        toggleTaskCompleted={toggleTaskCompleted}
+        deleteTask={deleteTask}
+        editTask={editTask}
+      />
+    ))
 
   const filterList = FILTER_NAMES.map(name => (
     <FilterButton
