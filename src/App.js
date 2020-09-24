@@ -25,7 +25,10 @@ function App (props) {
       name: name,
       completed: false
     }
-    setTasks([...tasks, newTask])
+
+    if (name !== '') {
+      setTasks([...tasks, newTask])
+    }
   }
 
   // checkmark toggle placed in Todo component
@@ -104,9 +107,7 @@ function App (props) {
         {headingText}
       </h2>
       <ul
-        role='list'
         className='todo-list stack-large stack-exception'
-        aria-labelledby='list-heading'
       >
 
         {taskList}
@@ -116,28 +117,8 @@ function App (props) {
   )
 }
 
-// <Todo name='Eat' completed={true} id='todo-0' />
-// <Todo name='Sleep' completed={false} id='todo-1' />
-// <Todo name='Repeat' completed={false} id='todo-2' />
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
 export default App
+
+// role='list'
+// className='todo-list stack-large stack-exception'
+// aria-labelledby='list-heading'
