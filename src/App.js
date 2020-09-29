@@ -21,7 +21,7 @@ function App (props) {
   // function that sets a state
   function addTask (name) {
     const newTask = {
-      id: 'id-' + nanoid(),
+      id: 'id-', //+ nanoid(),
       name: name,
       completed: false
     }

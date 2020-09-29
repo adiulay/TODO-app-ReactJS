@@ -54,7 +54,7 @@ export default function Todo (props) {
           onChange={() => props.toggleTaskCompleted(props.id)}
         />
         <label className='todo-label' htmlFor={props.id}>
-          {props.name}
+          <div data-testid="name-todo">{props.name}</div>
         </label>
       </div>
       <div className='btn-group'>

@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App snapshot test 1`] = `
+<div
+  className="todoapp stack-large"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <h2
+      className="label-wrapper"
+    >
+      <label
+        className="label__lg"
+        htmlFor="new-todo-input"
+      >
+        What needs to be done?
+      </label>
+    </h2>
+    <input
+      autoComplete="off"
+      className="input input__lg"
+      id="new-todo-input"
+      name="text"
+      onChange={[Function]}
+      placeholder="to do"
+      type="text"
+      value=""
+    />
+    <button
+      className="btn btn__primary btn__lg"
+      data-testid="addRequest"
+      type="submit"
+    >
+      Add
+    </button>
+  </form>
+  <div
+    className="filters btn-group stack-exception"
+  >
+    <button
+      aria-pressed={true}
+      className="btn toggle-btn"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="visually-hidden"
+      >
+        Show 
+      </span>
+      <span>
+        All
+      </span>
+      <span
+        className="visually-hidden"
+      >
+         tasks
+      </span>
+    </button>
+    <button
+      aria-pressed={false}
+      className="btn toggle-btn"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="visually-hidden"
+      >
+        Show 
+      </span>
+      <span>
+        Active
+      </span>
+      <span
+        className="visually-hidden"
+      >
+         tasks
+      </span>
+    </button>
+    <button
+      aria-pressed={false}
+      className="btn toggle-btn"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="visually-hidden"
+      >
+        Show 
+      </span>
+      <span>
+        Completed
+      </span>
+      <span
+        className="visually-hidden"
+      >
+         tasks
+      </span>
+    </button>
+  </div>
+  <h2
+    id="list-heading"
+  >
+    0 tasks remaining
+  </h2>
+  <ul
+    className="todo-list stack-large stack-exception"
+  />
+</div>
+`;
