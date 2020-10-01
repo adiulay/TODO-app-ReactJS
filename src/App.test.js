@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, screen, cleanup } from '@testing-library/react'
+import { render, screen, cleanup, getNodeText } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import renderer from 'react-test-renderer'
 import App from './App'
@@ -23,42 +23,40 @@ describe('<App />', () => {
     expect(linkElement).toBeInTheDocument()
   })
 
+  it("should display todo in App", () => {
+    const todo_list = [
+      { id: 'todo-1', name: 'eat', completed: true },
+      { id: 'todo-2', name: 'sleep', completed: true },
+      { id: 'todo-3', name: 'live', completed: false },
+      { id: 'todo-4', name: 'repeat', completed: true }
+    ]
+    // this one is important for me
+    const container = renderer.create(<App tasks={todo_list} />)
 
-  it('adds task to the screen', () => {
-    const { getAllByText } = render(<App tasks={[]} />)
-    const todo = 'Shower'
-    // screen.getByTestId('list-heading')
-    screen.getByText('0 tasks remaining')
+    const container_json = container.toJSON()
 
-    userEvent.type(screen.getByRole('textbox'), 'Shower')
-    userEvent.click(screen.getByTestId('addRequest'))
-
-    expect((getAllByText(todo)[0])).toBeInTheDocument()
-
-  });
-  
-})
-
-describe('<Form />', () => {
-  it('renders Form component', () => {
-    const { getByText } = render(<Form />)
-    const linkElement = getByText('Add')
-    expect(linkElement).toBeInTheDocument()
+    expect(container_json.children[3].children.length).toBe(4)
+    
   })
 
-  it('inputs the right value before adding', () => {
+  it('should display 1 active in todo', () => {
+    const todo_list = [
+      { id: 'todo-1', name: 'eat', completed: true },
+      { id: 'todo-2', name: 'sleep', completed: true },
+      { id: 'todo-3', name: 'live', completed: false },
+      { id: 'todo-4', name: 'repeat', completed: true }
+    ]
+
+    render(<App tasks={todo_list} />)
+
+    userEvent.click(screen.getByText('Active'))
+
+    expect(screen.getByText('1 task remaining')).toBeTruthy()
     
-    const testMessage = 'Do Homework'
-
-    const { getByRole } = render(<Form />)
-
-    userEvent.type(getByRole('textbox'), testMessage)
-
-    expect(screen.getByRole('textbox')).toHaveValue('Do Homework')
-
-  });
+  })
   
 })
+
 
 describe('<Todo />', () => {
   it('renders Todo component', () => {

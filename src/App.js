@@ -21,7 +21,7 @@ function App (props) {
   // function that sets a state
   function addTask (name) {
     const newTask = {
-      id: 'id-', //+ nanoid(),
+      id: 'id-'+ nanoid(),
       name: name,
       completed: false
     }
@@ -103,7 +103,7 @@ function App (props) {
       <div className='filters btn-group stack-exception'>
         {filterList}
       </div>
-      <h2 id='list-heading'>
+      <h2 id='list-heading' data-testid='list-heading'>
         {headingText}
       </h2>
       <ul
