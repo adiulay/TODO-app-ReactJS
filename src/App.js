@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Todo from './components/Todo'
 import Form from './components/Form'
 import './App.css'
@@ -15,8 +15,22 @@ const FILTER_NAMES = Object.keys(FILTER_MAP)
 
 function App (props) {
   // statehook
-  const [tasks, setTasks] = useState(props.tasks)
+  const [tasks, setTasks] = useState([])
   const [filter, setFilter] = useState('All')
+
+  useEffect(() => {
+    const data = localStorage.getItem('listOfTasks')
+
+    if (data) {
+      setTasks(JSON.parse(data)) //convert string to object
+    }
+
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('listOfTasks', JSON.stringify(tasks))
+  })
+
 
   // function that sets a state
   function addTask (name) {
@@ -67,6 +81,11 @@ function App (props) {
     setTasks(editedTaskList)
   }
 
+  // clears all tasks
+  function clearTasks () {
+    setTasks([])
+  }
+
   // the tasklist running through loop and return the component Todo
   const taskList = tasks
     .filter(task => FILTER_MAP[filter](task))
@@ -99,6 +118,10 @@ function App (props) {
     <div className='todoapp stack-large'>
 
       <Form addTask={addTask} />
+
+      <button onClick={clearTasks} className='btn btn__primary btn__lg'>
+          Clear All Tasks
+      </button>
 
       <div className='filters btn-group stack-exception'>
         {filterList}
