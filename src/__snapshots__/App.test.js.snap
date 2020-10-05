@@ -35,6 +35,12 @@ exports[`App snapshot test 1`] = `
       Add
     </button>
   </form>
+  <button
+    className="btn btn__primary btn__lg"
+    onClick={[Function]}
+  >
+    Clear All Tasks
+  </button>
   <div
     className="filters btn-group stack-exception"
   >

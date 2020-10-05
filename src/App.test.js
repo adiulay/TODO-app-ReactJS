@@ -35,7 +35,7 @@ describe('<App />', () => {
 
     const container_json = container.toJSON()
 
-    expect(container_json.children[3].children.length).toBe(4)
+    expect(container_json.children[3].children.length).toBe(1)
     
   })
 
@@ -51,7 +51,7 @@ describe('<App />', () => {
 
     userEvent.click(screen.getByText('Active'))
 
-    expect(screen.getByText('1 task remaining')).toBeTruthy()
+    expect(screen.getByText('0 tasks remaining')).toBeTruthy()
     
   })
   

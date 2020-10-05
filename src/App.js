@@ -119,13 +119,16 @@ function App (props) {
 
       <Form addTask={addTask} />
 
-      <button onClick={clearTasks} className='btn btn__primary btn__lg'>
-          Clear All Tasks
-      </button>
+      <div>
+        <button onClick={clearTasks} className='btn btn__primary btn__lg'>
+            Clear All Tasks
+        </button>
+      </div>
 
       <div className='filters btn-group stack-exception'>
         {filterList}
       </div>
+      
       <h2 id='list-heading' data-testid='list-heading'>
         {headingText}
       </h2>
