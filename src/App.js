@@ -29,7 +29,7 @@ function App (props) {
 
   useEffect(() => {
     localStorage.setItem('listOfTasks', JSON.stringify(tasks))
-  })
+  }, [tasks])
 
 
   // function that sets a state
@@ -83,6 +83,7 @@ function App (props) {
 
   // clears all tasks
   function clearTasks () {
+    localStorage.clear()
     setTasks([])
   }
 
