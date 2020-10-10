@@ -2,29 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
+import About from './components/About'
+import Home from './components/Home'
 import * as serviceWorker from './serviceWorker'
-
-const DATA = [
-  {
-    id: 'todo-0',
-    name: 'Eat',
-    completed: true
-  },
-  {
-    id: 'todo-1',
-    name: 'Sleep',
-    completed: false
-  },
-  {
-    id: 'todo-2',
-    name: 'Repeat',
-    completed: false
-  }
-]
+import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App tasks={DATA} />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 )
