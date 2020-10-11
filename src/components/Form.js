@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import ThemeContext from '../context/ThemeContext'
+import AppTheme from '../Colors'
 
 function Form (props) {
   // state name
@@ -14,6 +16,14 @@ function Form (props) {
   // sets state with the new string inputted by user
   function handleChange (e) {
     setName(e.target.value)
+  }
+
+  const theme = useContext(ThemeContext)
+
+  const currentTheme = AppTheme[theme]
+  const styles = {
+    backgroundColor: `${currentTheme.textColor}`,
+    color: `${currentTheme.backgroundColor}`
   }
 
   return (
@@ -33,10 +43,14 @@ function Form (props) {
         value={name}
         onChange={handleChange}
       />
-      <button type='submit' data-testid='addRequest' className='btn btn__primary btn__lg'>
+      <button style={styles} type='submit' data-testid='addRequest' className='btn btn__primary btn__lg'>
           Add
       </button>
+      <button style={styles} onClick={props.clearTasks} className='btn btn__primary btn__lg'>
+          Clear All Tasks
+      </button>
     </form>
+    
   )
 }
 
