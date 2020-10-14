@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react'
 import ThemeContext from '../context/ThemeContext'
-import AppTheme from '../Colors'
 
 function Form (props) {
   // state name
@@ -18,13 +17,10 @@ function Form (props) {
     setName(e.target.value)
   }
 
-  const theme = useContext(ThemeContext)
+  const changeTheme = useContext(ThemeContext)
 
-  const currentTheme = AppTheme[theme]
-  const styles = {
-    backgroundColor: `${currentTheme.textColor}`,
-    color: `${currentTheme.backgroundColor}`
-  }
+  const invertBackground = changeTheme['backgroundColor'] === "white" ? "black" : "white"
+  const invertText = changeTheme['color'] === "white" ? "black" : "white"
 
   return (
     <form onSubmit={handleSubmit}>
@@ -34,6 +30,7 @@ function Form (props) {
         </label>
       </h2>
       <input
+        style={{backgroundColor: invertText, color: invertBackground, borderColor: invertBackground}}
         type='text'
         id='new-todo-input'
         placeholder='to do'
@@ -43,10 +40,10 @@ function Form (props) {
         value={name}
         onChange={handleChange}
       />
-      <button style={styles} type='submit' data-testid='addRequest' className='btn btn__primary btn__lg'>
+      <button style={{backgroundColor: invertBackground, color: invertText}} type='submit' data-testid='addRequest' className='btn btn__primary btn__lg'>
           Add
       </button>
-      <button style={styles} onClick={props.clearTasks} className='btn btn__primary btn__lg'>
+      <button style={{backgroundColor: invertBackground, color: invertText}} onClick={props.clearTasks} className='btn btn__primary btn__lg'>
           Clear All Tasks
       </button>
     </form>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import ThemeContext from '../context/ThemeContext'
 
 // todo component accepting props parameter for name
 export default function Todo (props) {
@@ -16,6 +17,11 @@ export default function Todo (props) {
     setNewName('')
     setEditing(false)
   }
+
+  const changeTheme = useContext(ThemeContext)
+
+  const invertBackground = changeTheme['backgroundColor'] === "white" ? "black" : "white"
+  const invertText = changeTheme['color'] === "white" ? "black" : "white"
 
   const editingTemplate = (
     <form className='stack-small' onSubmit={handleSubmit}>
@@ -36,7 +42,7 @@ export default function Todo (props) {
           Cancel
           <span className='visually-hidden'>renaming {props.name}</span>
         </button>
-        <button type='submit' className='btn btn__primary todo-edit'>
+        <button type='submit' style={{backgroundColor: invertBackground, color: invertText}} className='btn btn__primary todo-edit'>
           Save
           <span className='visually-hidden'>new name for {props.name}</span>
         </button>

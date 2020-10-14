@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Home from './components/Home'
 import About from './components/About'
@@ -6,16 +6,29 @@ import Navbar from './components/Navbar'
 import Error from './components/Error'
 
 import ThemeContext from './context/ThemeContext'
-import AppTheme from './Colors'
 
 function App (props) {
-
   const theme = useContext(ThemeContext)
   const [themeState, setThemeState] = useState(theme)
-  const currentTheme = AppTheme[themeState]
-  const styles = {
-    backgroundColor: `${currentTheme.backgroundColor}`,
-    color: `${currentTheme.textColor}`
+
+  // localstorage used both use effect
+  useEffect(() => {
+    const currentTheme = localStorage.getItem('currentTheme')
+
+    if (currentTheme) {
+      setThemeState(currentTheme)
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('currentTheme', themeState)
+  }, [themeState])
+
+  // stores state of useContext
+  // const currentTheme = AppTheme[themeState]
+  const changeTheme = {
+    backgroundColor: `${themeState === "light" ? "white" : "black"}`,
+    color: `${themeState === "light" ? "black" : "white"}`,
   }
 
   function handleTheme () {
@@ -23,8 +36,8 @@ function App (props) {
   }
   
   return (
-    <ThemeContext.Provider value={themeState}>
-      <div className='todoapp stack-large' style={styles}>
+    <ThemeContext.Provider value={changeTheme}>
+      <div className='todoapp stack-large' style={changeTheme}>
         <Navbar themeState={themeState} handleTheme={handleTheme}/>
         <Switch>
           <Route path='/' component={ Home } exact />

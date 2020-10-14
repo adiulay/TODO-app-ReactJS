@@ -6,7 +6,6 @@ import FilterButton from './FilterButton'
 import { nanoid } from 'nanoid'
 
 import ThemeContext from '../context/ThemeContext'
-import AppTheme from '../Colors'
 
 const FILTER_MAP = {
   All: () => true,
@@ -136,15 +135,10 @@ function App (props) {
   const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task'
   const headingText = `${taskList.length} ${tasksNoun} remaining`
 
-  const theme = useContext(ThemeContext)
-  const currentTheme = AppTheme[theme]
-  const styles = {
-    backgroundColor: `${currentTheme.backgroundColor}`,
-    color: `${currentTheme.textColor}`
-  }
+  const changeTheme = useContext(ThemeContext)
 
   return (
-    <div style={styles}>
+    <div style={changeTheme}>
 
       <Form addTask={addTask} clearTasks={clearTasks} />
 
@@ -167,7 +161,3 @@ function App (props) {
 }
 
 export default App
-
-// role='list'
-// className='todo-list stack-large stack-exception'
-// aria-labelledby='list-heading'
