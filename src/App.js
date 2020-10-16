@@ -25,7 +25,6 @@ function App (props) {
   }, [themeState])
 
   // stores state of useContext
-  // const currentTheme = AppTheme[themeState]
   const changeTheme = {
     backgroundColor: `${themeState === "light" ? "white" : "black"}`,
     color: `${themeState === "light" ? "black" : "white"}`,
@@ -34,11 +33,14 @@ function App (props) {
   function handleTheme () {
     setThemeState(themeState === "light" ? "dark" : "light")
   }
+
+  // pass object on theme
+  const theme_ = { changeTheme, handleTheme }
   
   return (
-    <ThemeContext.Provider value={changeTheme}>
+    <ThemeContext.Provider value={theme_}>
       <div className='todoapp stack-large' style={changeTheme}>
-        <Navbar themeState={themeState} handleTheme={handleTheme}/>
+        <Navbar />
         <Switch>
           <Route path='/' component={ Home } exact />
           <Route path='/about' component = { About } />

@@ -17,10 +17,10 @@ function Form (props) {
     setName(e.target.value)
   }
 
-  const changeTheme = useContext(ThemeContext)
+  const theme_ = useContext(ThemeContext)
 
-  const invertBackground = changeTheme['backgroundColor'] === "white" ? "black" : "white"
-  const invertText = changeTheme['color'] === "white" ? "black" : "white"
+  const invertBackground = theme_.changeTheme['backgroundColor'] === "white" ? "black" : "white"
+  const invertText = theme_.changeTheme['color'] === "white" ? "black" : "white"
 
   return (
     <form onSubmit={handleSubmit}>

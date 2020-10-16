@@ -18,10 +18,10 @@ export default function Todo (props) {
     setEditing(false)
   }
 
-  const changeTheme = useContext(ThemeContext)
+  const theme_ = useContext(ThemeContext)
 
-  const invertBackground = changeTheme['backgroundColor'] === "white" ? "black" : "white"
-  const invertText = changeTheme['color'] === "white" ? "black" : "white"
+  const invertBackground = theme_.changeTheme['backgroundColor'] === "white" ? "black" : "white"
+  const invertText = theme_.changeTheme['color'] === "white" ? "black" : "white"
 
   const editingTemplate = (
     <form className='stack-small' onSubmit={handleSubmit}>

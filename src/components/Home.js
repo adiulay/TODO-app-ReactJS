@@ -135,10 +135,10 @@ function App (props) {
   const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task'
   const headingText = `${taskList.length} ${tasksNoun} remaining`
 
-  const changeTheme = useContext(ThemeContext)
+  const theme_ = useContext(ThemeContext)
 
   return (
-    <div style={changeTheme}>
+    <div style={theme_.changeTheme}>
 
       <Form addTask={addTask} clearTasks={clearTasks} />
 

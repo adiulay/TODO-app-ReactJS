@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import ThemeContext from '../context/ThemeContext'
 
 function Navbar (props) {
 
@@ -7,13 +8,15 @@ function Navbar (props) {
         cursor: "pointer"
     }
 
+    const theme_ = useContext(ThemeContext)
+
     return (
         <nav>
             <Link to="/">Home</Link>
             &nbsp;|&nbsp;
             <Link to="/about">About</Link>
             &nbsp;|&nbsp;
-            <button style={themeTogglerStyle} onClick={() => {props.handleTheme()}}>
+            <button style={themeTogglerStyle} onClick={() => {theme_.handleTheme()}}>
                 <span title = "switch theme">
                     {props.themeState === "light" ? "🌚" : "🌞"}
                 </span>
