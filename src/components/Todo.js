@@ -52,13 +52,25 @@ export default function Todo (props) {
 
   const viewTemplate = (
     <div className='stack-small'>
-      <div className='c-cb'>
+      <div>
         <input
           id={props.id}
-          type='checkbox'
-          defaultChecked={props.completed}
-          onChange={() => props.toggleTaskCompleted(props.id)}
-        />
+          type='radio'
+          checked={props.status === 0}
+          onChange={() => props.toggleTaskCompleted(props.id, 0)}
+        />NotStarted
+        <input
+          id={props.id}
+          type='radio'
+          checked={props.status === 1}
+          onChange={() => props.toggleTaskCompleted(props.id, 1)}
+        />Started
+        <input
+          id={props.id}
+          type='radio'
+          checked={props.status === 2}
+          onChange={() => props.toggleTaskCompleted(props.id, 2)}
+        />Completed
         <label className='todo-label' htmlFor={props.id}>
           <div data-testid="name-todo">{props.name}</div>
         </label>

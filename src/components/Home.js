@@ -9,8 +9,21 @@ import ThemeContext from '../context/ThemeContext'
 
 const FILTER_MAP = {
   All: () => true,
-  Active: task => !task.completed,
-  Completed: task => task.completed
+  NotStarted: (task) => {
+    if (task.status === 0) {
+      return task
+    }
+  },
+  Started: (task) => {
+    if (task.status === 1) {
+      return task
+    }
+  },
+  Completed: (task) => {
+    if (task.status === 2) {
+      return task
+    }
+  }
 }
 
 const FILTER_NAMES = Object.keys(FILTER_MAP)
@@ -19,17 +32,17 @@ const DATA = [
     {
         id: 'todo-0',
         name: 'Eat',
-        completed: true
+        status: 2
     },
     {
         id: 'todo-1',
         name: 'Sleep',
-        completed: false
+        status: 1
     },
     {
         id: 'todo-2',
         name: 'Repeat',
-        completed: false
+        status: 0
     }
 ]
 
@@ -57,7 +70,7 @@ function App (props) {
     const newTask = {
       id: 'id-'+ nanoid(),
       name: name,
-      completed: false
+      status: 0
     }
 
     if (name !== '') {
@@ -66,13 +79,13 @@ function App (props) {
   }
 
   // checkmark toggle placed in Todo component
-  function toggleTaskCompleted (id) {
+  function toggleTaskCompleted (id, status) {
     const updatedTasks = tasks.map(task => {
       // checks if ID is same as the one being edited
       if (id === task.id) {
         // !task.completed reverses the boolean 🤯
         // spread syntax is involved (...task)
-        return { ...task, completed: !task.completed }
+        return { ...task, status: status }
       }
       return task
     })
@@ -114,7 +127,7 @@ function App (props) {
       <Todo
         id={task.id}
         name={task.name}
-        completed={task.completed}
+        status={task.status}
         key={task.id}
         toggleTaskCompleted={toggleTaskCompleted}
         deleteTask={deleteTask}
