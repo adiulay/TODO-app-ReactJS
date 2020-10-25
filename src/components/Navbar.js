@@ -16,6 +16,8 @@ function Navbar (props) {
             &nbsp;|&nbsp;
             <Link to="/about">About</Link>
             &nbsp;|&nbsp;
+            <Link to="/API">API</Link>
+            &nbsp;|&nbsp;
             <button style={themeTogglerStyle} onClick={() => {theme_.handleTheme()}}>
                 <span title = "switch theme">
                     {props.themeState === "light" ? "🌚" : "🌞"}
