@@ -37,18 +37,6 @@ function API () {
         return response.quote
     }
 
-    async function fetchCountryByCurrency(symbol) {
-        const fetchCountry = await fetch(`https://restcountries.eu/rest/v2/currency/${symbol}`)
-
-        const response = await fetchCountry.json()
-        
-        if ("status" in response) {
-            return response
-        }
-
-        return response.name
-    }
-
     useEffect(() => {
         fetchCountry(country).then(resCode => {
             if ("status" in resCode) {
@@ -62,24 +50,44 @@ function API () {
 
             fetchCurrency(resCode.currencies[0].code).then(resCurrency => {
 
+                // resCurrency returns object currency code as key, currency number as value
+
                 // convert objects to array within array
-                var objectArray = Object.entries(resCurrency)
+                var objectArray = Object.entries(resCurrency) //Array [["AED", 2.72318], ["BSD", 0.75156]]
 
                 var arrayList = []
 
                 objectArray.forEach(([key, value]) => {
+                    var myList = ["CAD","USD","KPW","JPY","TWD","CNY","VND","GBP","EUR","BND"]
 
-                    var object = {
-                        code: key,
-                        currency: value
+                    var myCountries = [
+                        'Canada',
+                        'United States of America',
+                        'Korea',
+                        'Japan',
+                        'Taiwan',
+                        'China',
+                        'Vietnam',
+                        'United Kingdom',
+                        'France',
+                        'Singapore'
+                    ]
+                    
+                    // checks the "key" exist in object Array, then appends
+                    if (myList.includes(key)) {
+
+                        var object = {
+                            code: key,
+                            currency: value,
+                            country: myCountries[myList.indexOf(key)]
+                        }
+
+                        arrayList.push(object)
+
                     }
-
-                    arrayList.push(object)
                 })
 
-                
-
-                setCurrency(arrayList)
+                setCurrency(arrayList) //array of objects: [{}, {}]
 
             })
         })
@@ -87,7 +95,7 @@ function API () {
     }, [country])
 
     const currencyList = currency.map(item => (
-        <p key={item.code}>{item.code}: {item.currency}</p>
+    <p key={item.code}>{item.country} | {item.code}: {item.currency}</p>
     ))
 
     function handleSubmit(e) {
