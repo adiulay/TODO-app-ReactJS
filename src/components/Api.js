@@ -95,7 +95,14 @@ function API () {
     }, [country])
 
     const currencyList = currency.map(item => (
-    <p key={item.code}>{item.country} | {item.code}: {item.currency}</p>
+        <tbody key={item.code} style={{border: '1px solid'}}>
+            <tr style={{border: '1px solid'}}>
+                <td style={{border: '1px solid'}}>{item.code}</td>
+                <td style={{border: '1px solid'}}>{item.country}</td>
+                <td style={{border: '1px solid'}}>{item.currency}</td>
+            </tr>
+        </tbody>
+    // <p key={item.code}>{item.country} | {item.code}: {item.currency}</p>
     ))
 
     function handleSubmit(e) {
@@ -121,7 +128,7 @@ function API () {
                 <p>Below are conversion rate of {code} = {symbol}1</p>
             </div>
             
-            <div>{currencyList}</div>
+            <table style={{border: '1px solid'}}>{currencyList}</table>
         </div>
     )
 
