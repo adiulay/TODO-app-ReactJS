@@ -107,11 +107,16 @@ function API () {
 
     function handleSubmit(e) {
         e.preventDefault()
-        setCountry(userInput)
+        
+        if (userInput !== '') {
+            setCountry(userInput)    
+        }
     }
 
     function handleChange(e) {
-        setUserInput(e.target.value)
+        if (e.target.value !== '') {
+            setUserInput(e.target.value)
+        }
     }
 
     const result = (
