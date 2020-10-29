@@ -17,7 +17,7 @@ function API () {
     
         // error checks if country does not exist
         if ("status" in response) {
-            return response
+            return response //{"status": message, "error: 404"}
         }
         
         return response[0]
