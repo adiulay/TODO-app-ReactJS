@@ -34,6 +34,21 @@ export const addTech = tech => async dispatch => {
    /**
     * Assignment 7: Part A
     */
+    const res = await fetch("/techs", {
+      method: "POST",
+      body: JSON.stringify(tech),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+
+    const data = await res.json();
+    
+    dispatch({
+      type: ADD_TECH,
+      payload: data
+    })
+
   } catch (err) {
     dispatch({
       type: TECHS_ERROR,
