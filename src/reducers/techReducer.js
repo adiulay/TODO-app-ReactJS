@@ -1,4 +1,5 @@
 import {
+  ADD_TECH,
   GET_TECHS,
   DELETE_TECH,
   SET_LOADING,
@@ -24,6 +25,15 @@ export default (state = initialState, action) => {
     /**
      * Write the ADD_TECH case
      */
+    case ADD_TECH:
+      // action.payload is the new tech being added so we add to state.techs... i think
+      state.techs.push(action.payload)
+      // then returns to the new updated state
+      return {
+        ...state,
+        techs: state.techs,
+        loading: false
+      }
     case DELETE_TECH:
       return {
         ...state,
