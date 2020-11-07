@@ -27,11 +27,11 @@ export default (state = initialState, action) => {
      */
     case ADD_TECH:
       // action.payload is the new tech being added so we add to state.techs... i think
-      state.techs.push(action.payload)
+      // state.techs.push(action.payload)
       // then returns to the new updated state
       return {
         ...state,
-        techs: state.techs,
+        techs: [...state.techs, action.payload],
         loading: false
       }
     case DELETE_TECH:
